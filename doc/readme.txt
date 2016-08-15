@@ -1,4 +1,4 @@
-项目配置：
+项目配置1：
 1、导入doc/jeeshop.sql文件到数据库
 2、修改conf.properties中有关数据库用户名密码的配置。
 3、项目启动方式为maven方式，即使用maven命令：mvn tomcat6:run

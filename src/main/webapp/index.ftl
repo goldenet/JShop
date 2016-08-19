@@ -28,13 +28,7 @@ background: url("${systemSetting().defaultProductImg}"") no-repeat 50% 50%;
   display: none;
 }
 </style>
-<script>
-function defaultProductImg(){ 
-	var img=event.srcElement; 
-	img.src="${systemSetting().defaultProductImg}";
-	img.onerror=null; //控制不要一直跳动 
-}
-</script>
+
 	<@menu.menu/>
 	<div class="container" >
 		<div class="row">
@@ -61,7 +55,7 @@ function defaultProductImg(){
 				</div>
 				<@indexProduct.indexProduct queryType="hot" productList=systemManager().hotProducts title="热门商品" />
 				<@indexProduct.indexProduct queryType="sale" productList=systemManager().saleProducts title="特价商品" />
-				<@indexProduct.indexProduct queryType="newest" productList=systemManager().newProducts title="最新商品" />
+				
 			</div>
 			
 		</div>

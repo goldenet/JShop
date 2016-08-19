@@ -1,12 +1,9 @@
-#JShop
+大数据平台1
 ---
 
 JShop是Jeeshop的分支版本，与Jeeshop最大的区别在于技术选型上的差异：
 
-1. 使用spring mvc替换strutus2
-2. 使用freemarker替换jsp
-3. 使用maven替换传统的项目结构管理
-4. 将免费进行得更彻底：使用[jquery-treegrid](http://maxazan.github.io/jquery-treegrid/)([下载](https://github.com/maxazan/jquery-treegrid))替换easyui(因为easyui是GPL协议)
+(https://github.com/maxazan/jquery-treegrid))替换easyui(因为easyui是GPL协议)
 5. 更加紧密地拥抱bootstrap:后台管理界面使用[startbootstrap admin2](http://ironsummitmedia.github.io/startbootstrap-sb-admin-2/pages/index.html)([下载](https://github.com/IronSummitMedia/startbootstrap-sb-admin-2))
 
 ## JShop技术选型

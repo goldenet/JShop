@@ -145,12 +145,14 @@ body{
 						<#else>
                             <li><a href="${systemSetting().www}/index"><b>首页</b></a></li>
 						</#if>
-					<!-- 类别作为菜单显示 -->
-						<#list systemManager().catalogs as item>
-						    <#if item.showInNav == "y">
-								<li class="${(item.code == selectMenu)?string("active","")}"><a href="${basepath}/catalog/${item.code}.html"><b>${item.name}</b></a></li>
-							</#if>
-						</#list>
+						<li class=""><a href="${basepath}/data1.ftl"><b>数据</b></a></li>
+						<li class=""><a href="${basepath}/data2.ftl""><b>数据挖掘</b></a></li>
+						<li class=""><a href="${basepath}/data3.ftl""><b>解决方案</b></a></li>
+						<li class=""><a href="${basepath}/data4.ftl""><b>大数据学院</b></a></li>
+						
+					<!-- 类别作为菜单显示 -->	
+						
+					
 				</ul>
 
 		          <ul class="nav navbar-nav navbar-right" style="display: block;">

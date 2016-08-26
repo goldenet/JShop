@@ -70,11 +70,11 @@ KindEditor.ready(function(K) {
 		editor.loadPlugin('filemanager', function() {
 			editor.plugin.filemanagerDialog({
 				viewType : 'VIEW',
-				dirName : 'image',
+				dirName : '',
 				clickFn : function(url, title) {
 					//K('#picture').val(url);
-					//alert(url);
-					imagesInputObj.val(url);
+					arr=url.split("/")					
+					imagesInputObj.val(arr[4]);
 					editor.hideDialog();
 					clearRootImagePath(imagesInputObj);//$("#picture"));
 				}

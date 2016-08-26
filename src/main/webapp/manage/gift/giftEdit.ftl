@@ -123,8 +123,8 @@ KindEditor.ready(function(K) {
 				dirName : 'image',
 				clickFn : function(url, title) {
 					//K('#picture').val(url);
-					//alert(url);
-					imagesInputObj.val(url);
+					arr=url.split("/")					
+					imagesInputObj.val(arr[4]);
 					editor.hideDialog();
 					clearRootImagePath(imagesInputObj);//$("#picture"));
 				}

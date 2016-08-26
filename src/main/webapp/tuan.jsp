@@ -63,14 +63,15 @@ function defaultProductImg(){
 	<%
 	request.getSession().setAttribute(net.jeeshop.core.FrontContainer.selectMenu, "tuan");
 	%>
-	<%@ include file="/indexMenu.jsp"%>
+	<%@ include file="/indexMenu.ftl"%>
+	
 	<div class="container" >
 		<div class="row">
 			<!-- 左侧导航栏、热卖商品、文章、事项 -->
 			<div class="col-xs-3" style="margin-top: -15px;">
-				<%@ include file="/catalog_superMenu.jsp"%>
+				<%@ include file="/catalog_superMenu.ftl"%>
 				</br>
-				<%@ include file="productlist_left_picScroll.jsp"%>
+				<%@ include file="productlist_left_picScroll.ftl"%>
 			</div>
 			<!-- 右侧。滚动图片、新闻活动、首页商品展示 -->
 			<div class="col-xs-9" style="margin-top: -10px;">
@@ -80,8 +81,8 @@ function defaultProductImg(){
 			
 		</div>
 	</div>
-	<%@ include file="foot.jsp"%>
-	<%@ include file="index_superSlide_js.jsp"%>
+	<%@ include file="foot.ftl"%>
+	<%@ include file="index_superSlide_js.ftl"%>
 	<script type="text/javascript" src="<%=request.getContextPath() %>/resource/js/front.js"></script>
 <script>
 $(function() {

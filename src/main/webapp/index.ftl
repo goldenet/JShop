@@ -55,7 +55,6 @@ background: url("${systemSetting().defaultProductImg}"") no-repeat 50% 50%;
 				</div>
 				<@indexProduct.indexProduct queryType="hot" productList=systemManager().hotProducts title="热门商品" />
 				<@indexProduct.indexProduct queryType="sale" productList=systemManager().saleProducts title="特价商品" />
-				
 			</div>
 			
 		</div>

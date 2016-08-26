@@ -97,14 +97,10 @@ body{
 		          			(${currentAccount().loginType!""})
 		          		</span>
 					<#else >
-                        <span class="col-xs-12" id="loginOrRegSpan" style="font-size: 14px;">
-		          			<a href="${basepath}/account/login">登陆</a>|<a href="${basepath}/account/register">注册</a>
+                        <span class="col-xs-9" id="loginOrRegSpan" style="font-size: 14px;margin-left:160px;color:white">
+		          			<a href="${basepath}/account/login"><span style="color:white">登陆</span></a>|<a href="${basepath}/account/register"><span style="color:white">注册</span></a>
 		          		</span>
 					</#if>
-
-		          	<div style="vertical-align: middle;margin-top: 10px;font-size: 18px;z-index: 0;">
-		          		<span class="glyphicon glyphicon-earphone"></span>&nbsp;<#--客服热线:-->${systemSetting().tel}
-		          	</div>
 		    	</div>
 			</div>
 		</div>
@@ -145,10 +141,10 @@ body{
 						<#else>
                             <li><a href="${systemSetting().www}/index"><b>首页</b></a></li>
 						</#if>
-						<li class=""><a href="${basepath}/data1.ftl"><b>数据</b></a></li>
-						<li class=""><a href="${basepath}/data2.ftl""><b>数据挖掘</b></a></li>
-						<li class=""><a href="${basepath}/data3.ftl""><b>解决方案</b></a></li>
-						<li class=""><a href="${basepath}/data4.ftl""><b>大数据学院</b></a></li>
+						<li class=""><a href="${basepath}/menu/data1.ftl"><b>数据</b></a></li>
+						<li class=""><a href="${basepath}/menu/data2.ftl""><b>数据挖掘</b></a></li>
+						<li class=""><a href="${basepath}/menu/data3.ftl""><b>解决方案</b></a></li>
+						<li class=""><a href="${basepath}/menu/data4.ftl""><b>大数据学院</b></a></li>
 						
 					<!-- 类别作为菜单显示 -->	
 						

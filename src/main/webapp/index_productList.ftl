@@ -1,6 +1,7 @@
 
 <!-- 首页不同商品的展示 -->
 <#macro indexProduct queryType productList title>
+
 	<div class="row" class="col-xs-12" style="padding: 5px;">
 		<div class="alert alert-info" style="margin-bottom: 5px;margin-top: 5px;">
 			${title}

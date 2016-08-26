@@ -101,7 +101,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">主图</label>
                         <div class="col-md-10">
-                            <input type="button" name="filemanager" value="浏览图片1" class="btn btn-success"/>
+                            <input type="button" name="filemanager" value="浏览图片" class="btn btn-success"/>
                             <input type="text"  value="${e.picture!""}" name="picture" type="text" id="picture"  ccc="imagesInput" style="width: 600px;"
                                    data-rule="小图;required;maxPicture;"/>
 							<#if e.picture??>
@@ -109,6 +109,11 @@
                                     <img style="max-width: 50px;max-height: 50px;" alt="" src="${systemSetting().imageRootPath}${e.picture!""}">
                                 </a>
 							</#if>
+							<div class="upload">
+								<input class="ke-input-text" type="text" id="url" value="" readonly="readonly" /> <input type="button" id="uploadButton" value="Upload" />
+							</div>
+							
+							
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -422,7 +427,29 @@ function catalogChange(obj){
 	}
 }
 </script>
-
+<script>
+		KindEditor.ready(function(K) {
+				var uploadbutton = K.uploadbutton({
+					button : K('#uploadButton')[0],
+					fieldName : 'imgFile',
+					url : '${basepath}/editor/upload?dir=image',
+					afterUpload : function(data) {
+						if (data.error === 0) {
+							var url = K.formatUrl(data.url, 'absolute');
+							K('#url').val(url);
+						} else {
+							alert(data.message);
+						}
+					},
+					afterError : function(str) {
+						alert('自定义错误信息: ' + str);
+					}
+				});
+				uploadbutton.fileBox.change(function(e) {
+					uploadbutton.submit();
+				});
+			});
+</script>
 <script>
 	var editor;
 	KindEditor.ready(function(K) {
@@ -431,34 +458,9 @@ function catalogChange(obj){
             uploadJson : '${basepath}/editor/upload',
             fileManagerJson : '${basepath}/editor/fileManager'
 		});
-		K('input[name=getHtml]').click(function(e) {
-			alert(editor.html());
-		});
-		K('input[name=isEmpty]').click(function(e) {
-			alert(editor.isEmpty());
-		});
-		K('input[name=getText]').click(function(e) {
-			alert(editor.text());
-		});
-		K('input[name=selectedHtml]').click(function(e) {
-			alert(editor.selectedHtml());
-		});
-		K('input[name=setHtml]').click(function(e) {
-			editor.html('<h3>Hello KindEditor</h3>');
-		});
-		K('input[name=setText]').click(function(e) {
-			editor.text('<h3>Hello KindEditor</h3>');
-		});
-		K('input[name=insertHtml]').click(function(e) {
-			editor.insertHtml('<strong>插入HTML</strong>');
-		});
-		K('input[name=appendHtml]').click(function(e) {
-			editor.appendHtml('<strong>添加HTML</strong>');
-		});
-		K('input[name=clear]').click(function(e) {
-			editor.html('');
-		});
+				
 	});
+
 	
 	function addTrFunc(){
 		var cc = $("#firstTr").clone();
@@ -479,15 +481,16 @@ KindEditor.ready(function(K) {
 		fileManagerJson : '${basepath}/editor/fileManager'
 	});
 	K('input[name=filemanager]').click(function() {
+	
 		var imagesInputObj = $(this).parent().children("input[ccc=imagesInput]");
 		editor.loadPlugin('filemanager', function() {
 			editor.plugin.filemanagerDialog({
 				viewType : 'VIEW',
-				dirName : 'image',
+				dirName : '',
 				clickFn : function(url, title) {
 					//K('#picture').val(url);
-					//alert(url);
-					imagesInputObj.val(url);
+					arr=url.split("/")					
+					imagesInputObj.val(arr[4]);
 					editor.hideDialog();
 					clearRootImagePath(imagesInputObj);//$("#picture"));
 				}
@@ -505,8 +508,9 @@ KindEditor.ready(function(K) {
 	$(document).ready(function() {
 	
 		ajaxLoadImgList();
-		var url = '${basepath}/common/uploadify.do';
-		//alert(url);
+		alert("223");
+		var url = '${basepath}/upload/uploadify.do';
+		alert(url);
 		$("#uploadify").uploadify({
 			//'auto'           : false,
            'swf'       	 : '${basepath}/resource/uploadify/uploadify.swf',
@@ -525,7 +529,7 @@ KindEditor.ready(function(K) {
            'buttonText'     : '本地上传',
            
            onUploadSuccess:function(file, data, response){
-				//alert("上传成功,data="+data+",file="+file+",response="+response);      
+				alert("上传成功,data="+data+",file="+file+",response="+response);      
 //				ajaxLoadImgList();
 			   data = $.parseJSON(data);
 			   if(data.error == '1') {

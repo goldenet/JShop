@@ -34,6 +34,7 @@ div.zoomMask{position:absolute;background:url("${basepath}/resource/js/jquery.im
 
 	<div class="tb-booth tb-pic tb-s310">
 		<#list e.productImageList as img>
+		
 			<#if img_index==0>
 				<a href="${systemSetting().imageRootPath}${img.image3!""}">
 <!-- 				name="box_img" style="border: 0px;display: block;margin: auto;max-height: 100%;max-width: 334px;"  -->
@@ -46,6 +47,7 @@ div.zoomMask{position:absolute;background:url("${basepath}/resource/js/jquery.im
 
 	<ul class="tb-thumb" id="thumblist">
 <#list e.productImageList as img>
+
 			<#if img_index==0>
 				<li class="tb-selected">
 			<#else>

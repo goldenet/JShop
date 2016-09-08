@@ -91,7 +91,9 @@ public class MailUtil {
 			// 创建Properties对象
 			Properties props = System.getProperties();
 			// 创建信件服务器
-			props.put("mail.smtp.auth","true");   
+			props.put("mail.smtp.auth","true");  
+			// 发件人的账号
+	        //props.put("mail.user", "*******@qq.com");
 			props.put("mail.smtp.host", host);
 			props.put("mail.smtp.password", "0");
 			// 得到默认的对话对象

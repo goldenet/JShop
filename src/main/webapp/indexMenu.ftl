@@ -37,7 +37,7 @@ body{
 			<div class="col-xs-3">
 				<a href="${systemSetting().www}/index"><img style="max-height: 50px;" alt="myshop-logo" src="${systemSetting().log}"/></a>
 			</div>
-			<div class="col-xs-6" style="border: 0px solid blue;padding-left:5px;">
+			<div class="col-xs-6" style="border: 0px solid blue;padding-left:5px;margin-left:160px;">
 				<!-- search查询输入框 -->
 <!-- 				style="padding: 0px;margin-left: 0px;" -->
 				<form class="form-inline" role="form" name="searchForm" id="searchForm" method="post"
@@ -47,10 +47,10 @@ body{
 							<input type="text" name="key" id="key" class="form-control input-sm" style="border: 2px solid red;border-right: 0px;" 
 			      		placeholder="请输入商品关键字" size="40" value="${key!""}" maxlength="20"/>
 							<span class="input-group-btn">
-								<button value="搜索" class="btn btn-primary btn-sm" onclick="search();">
+								<button value="搜索" class="btn btn-primary btn-sm" onclick="search();" style="margin-left:6px;">
 									<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
 								</button>
-								<a class="btn btn-success btn-sm" href="${basepath}/cart/cart.html">
+								<a class="btn btn-success btn-sm" href="${basepath}/cart/cart.html" style="margin-left:2px;">
 									<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;购物车
 									<#if shoppingCart()?? && shoppingCart().productList?? && shoppingCart().productList?size gt 0>
                                         <span class="badge badge-success">${shoppingCart().productList?size}</span>
@@ -62,11 +62,14 @@ body{
 				</form>
 				<div style="text-align: left;margin-top: 5px;">热门搜索：
 					<#list systemManager().hotqueryList as item>
-                        <a class="hotSearch" href="${item.url}" target="_blank">
+                        <a class="hotSearch" href="${item.url}" target="_blank" style="color:white">
 							${item.key1!""}
                         </a>
 					</#list>
 				</div>
+			</div>
+			<div style="float:right;margin-top:5px;">
+				<a href="${basepath}/account/login"><span style="color:white;font-size:bold;">登陆</span></a>|<a href="${basepath}/account/register"><span style="color:white">注册</span></a>
 			</div>
 			<div class="col-xs-3" style="height: 100%;">
 		    	<div class="row" style="height: 100%;">
@@ -97,9 +100,7 @@ body{
 		          			(${currentAccount().loginType!""})
 		          		</span>
 					<#else >
-                        <span class="col-xs-9" id="loginOrRegSpan" style="font-size: 14px;margin-left:160px;color:white">
-		          			<a href="${basepath}/account/login"><span style="color:white">登陆</span></a>|<a href="${basepath}/account/register"><span style="color:white">注册</span></a>
-		          		</span>
+		          		
 					</#if>
 		    	</div>
 			</div>

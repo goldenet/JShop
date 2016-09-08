@@ -108,12 +108,7 @@
                                 <a target="_blank" href="${systemSetting().imageRootPath}${e.picture!""}">
                                     <img style="max-width: 50px;max-height: 50px;" alt="" src="${systemSetting().imageRootPath}${e.picture!""}">
                                 </a>
-							</#if>
-							<div class="upload">
-								<input class="ke-input-text" type="text" id="url" value="" readonly="readonly" /> <input type="button" id="uploadButton" value="Upload" />
-							</div>
-							
-							
+							</#if>						
                         </div>
                     </div>
                     <div class="form-group col-md-6">
@@ -243,14 +238,22 @@
 					<tr style="background-color: #dff0d8">
 						<td>新增图片 </td>
 					</tr>
+					  
 					<tr>
+					<div id="fileQueue"></div> 
 						<td>
-                            <input id="uploadify" name="uploadify" value="添加" class="btn btn-warning" type="button"/></td>
+                            <input id="uploadify" name="uploadify" value="添加" class="btn btn-warning" type="button"/>
+                        </td>
+					</tr>
+					<tr>
+						 <p>    
+	                		<a href="javascript:$('#uploadify').uploadify('upload')">开始上传</a>     
+	                		<a href="javascript:$('#uploadify').uploadify('cancel','*')">取消上传</a>    
+           				</p>              									
 					</tr>
 					<tr id="firstTr" style="display:none">
 						<td>
-								<#--<input type="button" name="filemanager" value="浏览图片" class="btn btn-warning"/>-->
-									<img name="img"  style="width:50px;height:50px;max-width: 50px;max-height: 50px;">
+								<img name="img"  style="width:50px;height:50px;max-width: 50px;max-height: 50px;">
 								<input type="text" ccc="imagesInput" name="images" style="width: 260px;" readonly="readonly"/>
 						</td>
 					</tr>
@@ -373,9 +376,9 @@ $(function() {
 	
 	selectDefaultCatalog();
 	
-	$("#removePife").click(function(){
-		clearRootImagePath();
-	});
+	//$("#removePife").click(function(){
+	//	clearRootImagePath();
+	//});
 });
 //删除图片主路径
 function deleteImageByImgPaths(){
@@ -463,6 +466,7 @@ function catalogChange(obj){
 
 	
 	function addTrFunc(){
+	alert("addTrFunc函数");
 		var cc = $("#firstTr").clone();
 		$("#firstTr").after(cc);
 		
@@ -508,48 +512,49 @@ KindEditor.ready(function(K) {
 	$(document).ready(function() {
 	
 		ajaxLoadImgList();
-		alert("223");
-		var url = '${basepath}/upload/uploadify.do';
-		alert(url);
+		
+		var url = '${basepath}/uploadify.do';
+		
 		$("#uploadify").uploadify({
-			//'auto'           : false,
-           'swf'       	 : '${basepath}/resource/uploadify/uploadify.swf',
+		
+		   'auto'           : false,
+           'swf'        	 : '${basepath}/resource/uploadify/uploadify.swf',
            'uploader'       : url,//后台处理的请求
            'queueID'        : 'fileQueue',//与下面的id对应
-           //'queueSizeLimit' :100,
-           //'fileTypeDesc'   : 'rar文件或zip文件',
-           //'fileTypeExts' 	 : '*.jpg;*.jpg', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
-           //'fileTypeExts'   : '*.rar;*.zip', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc  
-           
-           
-           //'fileTypeDesc' : '图片文件' , //出现在上传对话框中的文件类型描述
-//'fileTypeExts' : '*.jpg;*.bmp;*.png;*.gif', //控制可上传文件的扩展名，启用本项时需同时声明filedesc
-
+           'queueSizeLimit' :5,
+           'fileTypeDesc'   : '图片文件' , //出现在上传对话框中的文件类型描述,
+           'fileTypeExts' : '*.jpg;*.bmp;*.png;*.gif', //控制可上传文件的扩展名，启用本项时需同时声明filedesc
            'multi'          : true,
-           'buttonText'     : '本地上传',
-           
+           'buttonText'     : '本地上传',         
            onUploadSuccess:function(file, data, response){
-				alert("上传成功,data="+data+",file="+file+",response="+response);      
+           debugger;
+				alert("上传成功,data="+data+",file="+file+",response="+response);  
+				    
 //				ajaxLoadImgList();
-			   data = $.parseJSON(data);
+		  
 			   if(data.error == '1') {
 				   alert("上传失败：\n失败原因:" + data.msg);
 			   } else {
-					var $tr = $("#firstTr").clone();
-				   $tr.find("img[name=img]").attr("src", "${systemSetting().imageRootPath}" + data.filePath);
-				   $tr.find(":input[name=images]").val(data.filePath);
+				   var $tr = $("#firstTr").clone();
+				   $tr.find("img[name=img]").attr("src",data);
+				   imgArr=data.split("/");
+				   var imgSrc=imgArr[6]+"/"+imgArr[7];
+				   $tr.find(":input[name=images]").val(imgSrc);
 				   $("#firstTr").parent().append($tr);
 				   $tr.show();
 			   }
            },
+           
            onUploadError:function(file, errorCode, errorMsg) {
         	   alert("上传失败,data="+data+",file="+file+",response="+response);   
            }
 	 	});
 	});
 	
+	
 	//ajax加载内容图片列表
 	function ajaxLoadImgList(){
+	
 		if($("#id").val()==''){
 			 $("#fileListDiv").html("");
 			 return;

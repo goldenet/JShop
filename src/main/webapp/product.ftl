@@ -130,11 +130,12 @@ function defaultProductImg(){
 					<div class="row">
 						<h4 class="topCss">特价商品</h4>
 					</div>
+					
 					<#list saleProducts as item>
 						<div class="row">
 							<div class="col-xs-3">
 								<a href="${basepath}/product/${item.id!""}.html" target="_blank" title="${item.name!""}">
-									
+									<h>嚄嚄嚄嚄嚄${item.id}</h>
 									<img class="lazy" style="border: 0px;display: block;margin: auto;width: 50px;height: 50px;"
                                          src="${systemSetting().defaultProductImg}"
                                          data-original="${systemSetting().imageRootPath}${item.picture!""}" />
@@ -343,7 +344,7 @@ function defaultProductImg(){
 										<div class="col-xs-12">
 											
 											<br>购买数量：
-											<span onclick="subFunc()" style="cursor: pointer;"><img src="${basepath}/resource/images/minimize.png" style="vertical-align: middle;"/></span>
+											<span onclick="subFunc(this,false)" style="cursor: pointer;"><img src="${basepath}/resource/images/minimize.png" style="vertical-align: middle;"/></span>
 											<input value="1" size="4" maxlength="4" name="inputBuyNum" id="inputBuyNum" style="text-align: center;"/>
 											<!-- <a id="addProductToCartErrorTips" href="#" data-toggle="tooltip" data-placement="bottom" data-original-title="购买的商品超出库存数！"></a> -->
 											<span onclick="addFunc(this,false)" style="cursor: pointer;"><img src="${basepath}/resource/images/maximize.png" style="vertical-align: middle;"/></span>
@@ -464,6 +465,7 @@ function defaultProductImg(){
 <script src="${basepath}/resource/js/jquery.imagezoom/js/jquery.imagezoom.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
+
 	$(".jqzoom").imagezoom();
 	
 	$("#thumblist li a").click(function(){

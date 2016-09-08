@@ -19,7 +19,7 @@ function addFunc(obj,notifyCartFlg){
 }
 //减少购买商品数
 function subFunc(obj,notifyCartFlg){
-	var _obj = $(obj).parent().find("input");
+	var _obj = $(obj).parent().find("input[name=inputBuyNum]");
 	var quantity = _obj.val();
 	if (/^\d*[1-9]\d*$/.test(quantity)) {
 		if(quantity>1){

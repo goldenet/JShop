@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -28,7 +31,7 @@ public class KindController {
 
     @RequestMapping("upload")
     @ResponseBody
-    public String uploadFile(@RequestParam(required = true, value = "imgFile") MultipartFile file,
+    public String uploadFile(HttpServletRequest request, HttpServletResponse response,@RequestParam(required = true, value = "imgFile") MultipartFile file,
                              @RequestParam(required = false) String dir, HttpSession session) {
         SystemSetting systemSetting = SystemManager.getInstance().getSystemSetting();
         //文件保存目录路径
@@ -36,23 +39,26 @@ public class KindController {
         //文件保存目录URL
         String saveUrl = systemSetting.getImageRootPath();
 
-//定义允许上传的文件扩展名
+        //定义允许上传的文件扩展名
         HashMap<String, String> extMap = new HashMap<String, String>();
         extMap.put("image", "gif,jpg,jpeg,png,bmp");
         extMap.put("flash", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
         extMap.put("media", "swf,flv,mp3,wav,wma,wmv,mid,avi,mpg,asf,rm,rmvb");
         extMap.put("file", "doc,docx,xls,xlsx,ppt,htm,html,txt,zip,rar,gz,bz2");
 
-//最大文件大小
+        //最大文件大小
         long maxSize = 1000000;
 
         session.setAttribute("ajax_upload", 1);
-//检查目录
+        //检查目录
+        String path3=request.getRealPath("");
+        savePath=path3+"/"+savePath;
         File uploadDir = new File(savePath);
+        
         if (!uploadDir.isDirectory()) {
             return (getError("上传目录不存在。"));
         }
-//检查目录写权限
+        //检查目录写权限
         if (!uploadDir.canWrite()) {
             return (getError("上传目录没有写权限。"));
         }
@@ -61,7 +67,7 @@ public class KindController {
         if (!extMap.containsKey(dirName)) {
             return (getError("目录名不正确。"));
         }
-//创建文件夹
+        //创建文件夹
         savePath += dirName + "/";
         saveUrl += dirName + "/";
         File saveDirFile = new File(savePath);
@@ -123,7 +129,7 @@ public class KindController {
 
     @RequestMapping("fileManager")
     @ResponseBody
-    public String fileManager(@RequestParam(value = "dir") String dirName, @RequestParam(required = false) String path,
+    public String fileManager(HttpServletRequest request, HttpServletResponse response,@RequestParam(value = "dir") String dirName, @RequestParam(required = false) String path,
                               @RequestParam(required = false, defaultValue = "name") String order) {
         SystemSetting systemSetting = SystemManager.getInstance().getSystemSetting();
         String rootPath = SystemManager.getInstance().getProperty("file.upload.path");
@@ -165,13 +171,19 @@ public class KindController {
             path += "/";
         }
         //目录不存在或不是目录
+        String path3=request.getRealPath("");
+        currentPath=path3+"/"+currentPath;
         File currentPathFile = new File(currentPath);
         if (!currentPathFile.isDirectory()) {
             return ("Directory does not exist.");
         }
-
+       
+        String pathcurr=request.getContextPath();
+        
+       
         //遍历目录取的文件信息
         List<Hashtable> fileList = new ArrayList<Hashtable>();
+      
         Map<String, String> addFileMap = new HashMap<String, String>();
         logger.debug("currentPathFile.listFiles=" + currentPathFile);
         logger.debug("currentPathFile.listFiles=" + currentPathFile.listFiles());

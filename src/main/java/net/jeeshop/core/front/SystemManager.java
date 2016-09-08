@@ -260,9 +260,11 @@ public class SystemManager {
             cacheProvider.put(key1, cacheObject);
         }
     }
+    
     private static <T extends Serializable> T getCacheObject(String key){
         return (T)cacheProvider.get(buildKey(key));
     }
+    
 
     /**
      * 产品目录列表

@@ -269,7 +269,7 @@
 						手机：${e.ordership.phone!""}<br>
 						座机：${e.ordership.tel!""}<br>
 					</td>
-					<td style="width: 200px;">
+					<td style="width: 200px; ">
 						省份：${e.ordership.province!""}<br>
 						城市：${e.ordership.city!""}<br>
 						区域：${e.ordership.area!""}<br>

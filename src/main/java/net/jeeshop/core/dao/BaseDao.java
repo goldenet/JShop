@@ -184,12 +184,11 @@ public class BaseDao extends SqlSessionDaoSupport {
 		int row = session.update(arg0, arg1);
 		if(row==1){
 			if(arg1 instanceof PagerModel){
-//				return Integer.valueOf(((PagerModel)arg1).getId());
 				String obj = ((PagerModel)arg1).getId();
 				if(obj==null){
 					return 0;
 				}
-				return Integer.valueOf(obj);
+				return 1;
 			}
 		}
 		return 1;

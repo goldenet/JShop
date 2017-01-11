@@ -28,35 +28,21 @@ background: url("${systemSetting().defaultProductImg}"") no-repeat 50% 50%;
   display: none;
 }
 </style>
-
-	<@menu.menu/>
-	<div class="container" >
+	
+		<@menu.menu/>
+		<div class="container">
 		<div class="row">
 			<!-- 左侧导航栏、热卖商品、文章、事项 -->
-			<div class="col-xs-3" style="margin-top: -15px;">
+			<div class="col-xs-3">
 				<#include "/catalog_superMenu.ftl">
 				</br>
-				<#include "/productlist_left_picScroll.ftl">
+
 			</div>
 			<!-- 右侧。滚动图片、新闻活动、首页商品展示 -->
-			<div class="col-xs-9" style="margin-top: -10px;">
-				<div class="row">
-					<div class="col-xs-9">
-							<div class="row" style="border:0px solid red;padding: 5px;">
-								<#include "/index_center_slide.ftl"/>
-							</div>
-					</div>
-					<div class="col-xs-3">
-<!-- 							<div style="border:1px solid red;"></div> -->
-							<div class="row" style="border:0px solid red;padding: 5px;">
-								<#include "/index_notice_slide.ftl"/>
-							</div>
-					</div>
-				</div>
-				<@indexProduct.indexProduct queryType="hot" productList=systemManager().hotProducts title="热门商品" />
-				<@indexProduct.indexProduct queryType="sale" productList=systemManager().saleProducts title="特价商品" />
-			</div>
-			
+			<div class="col-xs-9">
+				<#include "/index_center_slide.ftl"/>
+				
+			</div>			
 		</div>
 	</div>
 <script>

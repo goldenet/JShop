@@ -2,13 +2,18 @@
 <link rel="stylesheet"
 	href="${basepath}/resource/js/superMenu/css/css.css"
 	type="text/css">
-
+<style>
+#alldata{
+background-image: url("/jshop/resource/images/tyoe.png");
+}</style>
 <div id="sidebar">
-	<#list systemManager().catalogs as item>
-       <div class="sidelist">
+
+<h3 style="padding-top:15px;padding-left:30px;padding-bottom:15px;margin:0px;color:#00B2EE">所有数据分类</h3>
+<#list systemManager().catalogs as item>	
+       <div class="sidelist">    
 			<span>
 				<h3>
-					<a href="${basepath}/catalog/${item.code}.html">${item.name}</a>
+					<a href="${basepath}/catalog/${item.code}.html"><b style="color:#00B2EE">${item.name}</b></a>
 				</h3>
 			</span>
 			<div class="i-list">
@@ -16,7 +21,7 @@
 					<#if item.children??>
 						<#list item.children as sItem>
 						<li>
-		          			<a href="${basepath}/catalog/${sItem.code}.html">${sItem.name}</a>
+		          			<a href="${basepath}/catalog/${sItem.code}.html"><b>${sItem.name}</b></a>
 						</li>
 						</#list>
 					</#if>

@@ -6,7 +6,7 @@
 <style>
 	
 	/* IndexBottom */
-.IndexBottom{padding-top:20px;padding-bottom:10px;border-top: 2px solid #f40;}
+.IndexBottom{padding-top:20px;padding-bottom:10px;border-top: 2px solid #d4a493;}
 .IndexBottom dl{float: left;display: inline;width: 110px;margin-top: 22px;margin-left: 43px;}
 .IndexBottom dt{margin-left: 5px;font-family: "Microsoft YaHei",\5fae\8f6f\96c5\9ed1,\5b8b\4f53;font-size: 16px;}
 .IndexBottom dd{margin-top: 4px;}
@@ -15,11 +15,12 @@
 /* .IndexBottom dd span a:hover{background: url(../i/index_sprite.png) no-repeat -141px -316px;+background-position: -141px -318px;_background-position: -141px -316px;} */
 .IndexBottom .aboutjy{margin-left: 68px;}
 .IndexBottom .IndexBottom-help{margin-left: 112px;}
+a{
+color:#999;
+font-weight:bold;
+}
 </style>
-	<div id="footer" style="margin-top: 20px;">
-	
-<!-- 	<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation"> -->
-	
+	<div id="footer" style="margin-top: 40px;">
 		<div class="container">
 			<div class="row IndexBottom">
 				<#list systemManager().newsCatalogs as item>

@@ -18,26 +18,100 @@ body{
 	font-size: 20px;
 	font-family:Tahoma,Helvetica,"microsoft yahei","Hiragino Sans GB",Simsun,\5b8b\4f53,sans-serif
 }
-</style>
 
-<style>
+.top-wrapper{
+	background:#fff;
+	padding:48px 0 42px;
+	margin:0;
+	display:block;
+}
 
+.menuTitle{
+	position:relative;
+	height:50px;
+	width:1100px;
+	margin:0 auto;
+	border-spacing:0;
+	font-size:12px;
+}
+.menuTitle h1{
+	position: absolute;
+    left: 0;
+    top: 0;
+    width: 310px;
+    height: 58px;
+    padding: 0;
+    margin: 0;
+    display: block;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+	text-align:center;
+}
+.menuTitle nav{
+	position: absolute;
+    left: 314px;
+    top: 8px;
+    height: 46px;
+    line-height: 76px;
+}
+
+.clearFix{
+	    zoom: 1;
+}
+.menuTitle nav li{
+	float: left;
+    padding: 0 14px;
+    list-style: none;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.menuTitle nav li a{
+	color: #22a1dc;
+    font-size: 18px;
+    display: block;
+    height: 100%;
+    padding: 0 3px;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+}
+
+.search{
+    position: absolute;
+    right: 0;
+    top: 25px;
+    padding: 10px 0 10px 16px;
+    height: 18px;
+    line-height: 18px;
+    width: 400px;
+}
 .hotSearch{
 	cursor: pointer;
+}
+.input-group stylish-input-group{
+	line-height:66px;
 }
 </style>
 <!-- 顶部导航条 -->
 <!--登陆，注册，促销活动，积分商城-->
-<div style="height:30px;font-size:15px;background-color:#f8f8f8" >
-<div class="container">
-<div class="row" style="float:right">
-<a href="${basepath}/activity.html" >
-				<span class="glyphicon glyphicon-time"></span>
+<div id="header" style="height:35px;font-size:15px;background-color:#f8f8f8;text-align:right;width:100%" >
+			<a href="${basepath}/activity.html" >
+			<!--	<span class="glyphicon glyphicon-time"></span>
 				促销活动</a> |
 				<a href="${basepath}/activity/score.html" >
 					积分商城</a> |
 					<a href="${basepath}/activity/tuan.html" >
 					团购活动</a> |
+					-->
 					<#if currentAccount()??>
                         <span id="myshopMenuPPP" style="display: inline-block;z-index: 9999;position: relative;;">
 		          			<!-- 会员中心的菜单 -->
@@ -64,70 +138,44 @@ body{
 							${currentAccount().nickname!""}
 		          			(${currentAccount().loginType!""})
 		          		</span>
-					<#else >                      
-		          		<a href="${basepath}/account/login">登陆</a> |
-		          		<a href="${basepath}/account/register">注册</a>
+					<#else >    
+					<div style="padding-top:3px;padding-right:100px">                  
+		          		<a href="${basepath}/account/login" style="color:#00aeff;">登陆</a> |
+		          		<a href="${basepath}/account/register" style="color:#ff7a32">注册</a>
+		          		<div>
 					</#if>
-	
-</div>	
-</div>
-</div>
-<div class="container">
-	<div class="row">
-		<!--logo-->
-		<div class="col-xs-3" style="height:100px;padding-top:10px">
-			<a href="${systemSetting().www}/index"><img style="margin-top:10px" alt="myshop-logo" src="${systemSetting().log}"/></a>
-		</div>
-		<div class="col-xs-9" style="height:100px;padding-top:25px" >			
-			<!-- search查询输入框 -->
-				<form class="form-inline" role="form" name="searchForm" id="searchForm" method="post"
-								action="${basepath}/search.html" >
-					<div class="form-group btn-group">
-						<div class="input-group">
-							<input type="text" name="key" id="key" class="form-control input-sm" style="border: 1px solid #ececec;border-right: 0px;" 
-			      		placeholder="请输入商品关键字" size="40" value="${key!""}" maxlength="20"/>
-							<span class="input-group-btn">
-								<button value="搜索" class="btn btn-primary btn-sm" onclick="search();">
-									<span class="glyphicon glyphicon-search"></span>&nbsp;搜索
-								</button>
-								<a class="btn btn-success btn-sm" href="${basepath}/cart/cart.html">
-									<span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;购物车
-									<#if shoppingCart()?? && shoppingCart().productList?? && shoppingCart().productList?size gt 0>
-	                                    <span class="badge badge-success">${shoppingCart().productList?size}</span>
-									</#if>
-								</a>
-							</span>
-						</div>
-					</div>
-				 </form>
-				<div style="text-align: left;margin-top: 5px;font-size: 15px;">热门搜索：
-					<#list systemManager().hotqueryList as item>
-	                    <a class="hotSearch" href="${item.url}" target="_blank">
-							${item.key1!""}
-	                    </a>
-					</#list>
-				</div>	
-		</div>				
 	</div>	
-	<div class="row">
-		<!-- 菜单行 -->
-		<div class="row" style="height:50px">
-			 <ul class="nav navbar-nav  navbar-right" >
-		  		<!-- 首页 -->
+</div>
+<!-- header end -->
+	<div class="top-wrapper">
+	<div id="menuTitle" class="menuTitle">
+		<h1>
+			<a href="${systemSetting().www}/index"><img style="" src="${systemSetting().log}"/></a>
+		</h1>
+		<nav>
+			<ul class="clearfix">
+			<!-- 首页 -->
 				<#if selectMenu=="0">
-		            <li class="active"><a href="${systemSetting().www}/index"><b style="color:#00B2EE">首页</b></a></li>
+		            <li class="active"><a href="${systemSetting().www}/index">首页</a></li>
 				<#else>
-		            <li><a href="${systemSetting().www}/index"><b>首页</b></a></li>
+		            <li><a href="${systemSetting().www}/index">首页</a></li>
 				</#if>
-				<li class=""><a href="${basepath}/menu/data1.ftl"><b style="color:#00B2EE">数据</b></a></li>
-				<li class=""><a href="${basepath}/menu/data2.ftl""><b style="color:#00B2EE">数据挖掘</b></a></li>
-				<li class=""><a href="${basepath}/menu/data3.ftl""><b style="color:#00B2EE">解决方案</b></a></li>
-				<li class=""><a href="${basepath}/menu/data4.ftl""><b style="color:#00B2EE">大数据学院</b></a></li>
-				<li class=""><a href="${basepath}/menu/data5.ftl""><b style="color:#00B2EE">新闻动态</b></a></li>					
-			</ul>			
+				<li ><a href="${basepath}/menu/data3.ftl"">解决方案</a></li>
+				<li ><a href="${basepath}/menu/data4.ftl"">大数据学院</a></li>
+				<li ><a href="${basepath}/menu/data5.ftl"">新闻动态</a></li>	
+			</ul>
+		</nav>
+		<div class="search">
+		<form class="form-inline" role="form" name="searchForm" id="searchForm" method="post" action="${basepath}/search.html" >
+                    <input type="text" class="form-control"  placeholder="请输入关键字" style="width:200px" >
+                  <button class="btn">  
+       				 <span class="glyphicon glyphicon-search" style="" ></span>   
+   				 </button> 
+				 </form>
 		</div>
-	</div>	
 </div>
+
+
 <script type="javascript">
 //搜索商品
 function search(){

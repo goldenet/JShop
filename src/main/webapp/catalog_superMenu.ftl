@@ -4,16 +4,49 @@
 	type="text/css">
 <style>
 #alldata{
-background-image: url("/jshop/resource/images/tyoe.png");
-}</style>
-<div id="sidebar">
+	background-image: url("/jshop/resource/images/tyoe.png");
+}
+#sidebar{
+	float: left;
+    width: 278px;
+    height: 608px;
+    background: #fcfcfc;
+    border-radius: 3px;
+    border: 1px solid #ececec;
+  
+}
+h2 {
+	font-size:20px;
+	padding-left: 30px;
+	padding-top:20px;
+	margin:0px;color:#00B2EE;
+    border-bottom: 1px solid #f4f4f4;
+    background: #fbfbfb;
+    width:275px;
+    text-align:left;
+    height: 50px;
+    line-height: 0.5;
+}
 
-<h3 style="padding-top:15px;padding-left:30px;padding-bottom:15px;margin:0px;color:#00B2EE">所有数据分类</h3>
-<#list systemManager().catalogs as item>	
+.sidelist span h3{
+    height: 52px;
+    line-height: 52px;
+    padding-top:10px;
+   
+}
+
+
+</style>
+
+
+<div id="sidebar">
+	<h2 style=""> 数据分类 </h2>
+		<#list systemManager().catalogs as item>	
        <div class="sidelist">    
 			<span>
 				<h3>
-					<a href="${basepath}/catalog/${item.code}.html"><b style="color:#00B2EE">${item.name}</b></a>
+					<a href="${basepath}/catalog/${item.code}.html"><b style="color: #666;">${item.name}</b></a>
+
 				</h3>
 			</span>
 			<div class="i-list">
@@ -43,4 +76,5 @@ background-image: url("/jshop/resource/images/tyoe.png");
 			</div>
 		</div>
 	</#list>
+	
 </div>

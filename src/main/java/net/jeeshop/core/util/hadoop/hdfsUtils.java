@@ -1,21 +1,25 @@
 package net.jeeshop.core.util.hadoop;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
+import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.hdfs.DistributedFileSystem;
 import org.apache.hadoop.hdfs.protocol.DatanodeInfo;
+import org.springframework.web.multipart.MultipartFile;
 
 public class hdfsUtils {
 
 	// 文件系统连接到 hdfs的配置信息
-	private static Configuration getConf() {
+	public static Configuration getConf() {
 		Configuration conf = new Configuration();
 		// 这句话很关键，这些信息就是hadoop配置文件中的信息
 		conf.set("mapred.job.tracker", "10.5.5.100:9001");
@@ -25,8 +29,11 @@ public class hdfsUtils {
 
 	/**
 	 * 从 HDFS 下载
-	 * @param src 远程路径
-	 * @param dst 本地路径
+	 * 
+	 * @param src
+	 *            远程路径
+	 * @param dst
+	 *            本地路径
 	 * @param conf
 	 * @return
 	 */
@@ -44,6 +51,7 @@ public class hdfsUtils {
 
 	/**
 	 * 获取HDFS集群上所有节点名称信息
+	 * 
 	 * @throws IOException
 	 */
 	public static void getDateNodeHost() throws IOException {
@@ -58,6 +66,7 @@ public class hdfsUtils {
 
 	/**
 	 * 删除hdfs 远程文件夹
+	 * 
 	 * @param dst
 	 * @return
 	 * @throws IOException
@@ -73,6 +82,7 @@ public class hdfsUtils {
 
 	/**
 	 * 创建文件夹
+	 * 
 	 * @param dir
 	 * @throws IOException
 	 */
@@ -82,8 +92,10 @@ public class hdfsUtils {
 		fs.mkdirs(new Path(dir));
 		fs.close();
 	}
+
 	/**
 	 * 显示所有文件夹
+	 * 
 	 * @param dir
 	 * @throws IOException
 	 */
@@ -101,9 +113,10 @@ public class hdfsUtils {
 			}
 		}
 	}
-	
+
 	/**
 	 * 获取HDFS文件流
+	 * 
 	 * @param conf
 	 * @throws IOException
 	 */
@@ -122,4 +135,37 @@ public class hdfsUtils {
 		hdfsInStream.close();
 		fs.close();
 	}
+
+	public static boolean sendFile(String path, String localfile) {
+		Configuration conf = getConf();
+		File file = new File(localfile);
+		if (!file.isFile()) {
+			System.out.println(file.getName());
+			return false;
+		}
+		try {
+			FileSystem localFS = FileSystem.getLocal(conf);
+			FileSystem hadoopFS = FileSystem.get(conf);
+			Path hadPath = new Path(path);
+			FSDataOutputStream fsOut = hadoopFS.create(new Path(path + "/" + file.getName()));
+			FSDataInputStream fsIn = localFS.open(new Path(localfile));
+			byte[] buf = new byte[1024];
+			int readbytes = 0;
+			while ((readbytes = fsIn.read(buf)) > 0) {
+				fsOut.write(buf, 0, readbytes);
+			}
+			fsIn.close();
+			fsOut.close();
+			FileStatus[] hadfiles = hadoopFS.listStatus(hadPath);
+			for (FileStatus fs : hadfiles) {
+				System.out.println(fs.toString());
+			}
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+
 }

@@ -1,65 +1,42 @@
-<style>
-#alldata{
-	background-image: url("/jshop/resource/images/tyoe.png");
-}
-#myCarousel{
-	float: right;
-    width: 750px;
-    height: 410px;
-    overflow: hidden;
-}
-.sidelist{
-	    color: #666;
-    font-size: 16px;
-    line-height: 26px;
 
-}
-.xiao-ban-ul{
-	padding-top: 20px;
-}
-.xiao-ban-ul li{
-	float: left;
-    width: 232px;
-    height: 140px;
-    list-style: none;
-     display: table-row;
-    text-align: -webkit-match-parent;
-}
-.png_bg{
-  
-}
-
-.xiao-ban-ul{
-    width: 100%;
-    height: 90%;
-    position: absolute;
-    left: 30px;
-    top: 410px;
-    z-index: 6;
-    text-align: center;
-}
-</style>
-
-
-
-
-<div id="myCarousel" class="" style="background-color:red">
-	
-</div> 
-<!--
-<ul class="xiao-ban-ul">
-                                        <li>
-                    <a class="png_bg" href="https://www.juhe.cn/activity/oneDiscount" target="_blank"><img src="${basepath}/resource/images/indexFtl/act01.png" border="0"></a>
-                    </li>
-                                        <li class="xiao-two">
-                    <a class="png_bg" href="https://www.juhe.cn/activity/reg" target="_blank"><img src="https://juheimgs.oss-cn-beijing.aliyuncs.com/banner/201609/57cd488dcea4b.png" border="0"></a>
-                    </li>
-                                        <li>
-                    <a class="png_bg" href="https://www.juhe.cn/contact" target="_blank"><img src="https://juheimgs.oss-cn-beijing.aliyuncs.com/banner/201609/57d7bdaf47f84.png" border="0"></a>
-                    </li>
-                    				</ul>
--->
+<!-- 首页中间位置图片轮播 -->
+<div class="zhuanti_box" style="padding 0">
+  <div id="slideBox">
+    <div class="J_slide" style="height: 100%;">
+    <!--轮播图图片高度-->
+      <div class="J_slide_clip" id="slide">
+        <ul class="J_slide_list">
+			<#list systemManager().indexImages as item>
+		          <li class="J_slide_item">
+		          <#if item.link??>
+			          <a href="${item.link!""}" target="_blank">
+			          	<img style="max-width: 100%;" 
+			          	src="${systemSetting().imageRootPath}/${item.picture!""}" >
+			          </a>
+		          <#else>
+                      <img style="max-width: 100%;"
+                           src="${systemSetting().imageRootPath}/${item.picture!""}" >
+		          </#if>
+		          </li>
+			</#list>
+        </ul>
+      </div>
+      <ul class="J_slide_trigger">
+		<#list systemManager().indexImages as item>
+	        <li class="">
+	        	<a href="javascript:" title="${item.title!""}">
+				${item.title!""}
+	        	</a>
+	        </li>
+			</#list>
+      </ul>
+    </div>
+  </div>
+</div>
   <script type="text/javascript">
    new Tab('.J_tab',{auto:false});
    new Slide('#slideBox',{index: 1 ,effect:'slide', firstDelay:8});
+   $(function(){
+   		$("#slide").height("368px");
+   })
   </script>
